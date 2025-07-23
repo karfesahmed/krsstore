@@ -1,0 +1,32 @@
+
+{% extends "costumerportal/layout.html" %}
+{% load static %}
+{% block title %}
+    KRS Products
+{% endblock title %}
+
+{% block body %}
+<div class="container my-5">
+  <h2 class="text-center text-light mb-4">Products</h2>
+
+  <div class="row">
+    {% for i in "1234567" %}
+    <div class="col-12 col-md-3 mb-4">
+        <div class="card shadow-sm h-100" style="background-color: #2c2f33; color: white;">
+            <img src="{% static 'images/test.webp'%}" class="card-img-top" alt="error">
+            <div class="card-body text-center">
+                <h5 class="card-title">Product #{{ i }}</h5>
+                <p class="card-text">A brief description of a great and unique product.</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <button class="btn btn-dark fw-bold">Order Now</button>
+                    <p class="fw-bold mb-0">$9.99</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock body %}

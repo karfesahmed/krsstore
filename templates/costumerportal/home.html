@@ -1,0 +1,75 @@
+
+{% extends "costumerportal/layout.html" %}
+{% load static %}
+{% block title %}
+    KRS store
+{% endblock title %}
+
+{% block body %}
+<!-- Hero Section -->
+
+<div class="container ">
+    <div class="row w-100">
+        <!-- Text Section (Left on large screens) -->
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-start p-5">
+            <h1 class="display-4 fw-bold">Welcome to <span class="text-warning">KRS Store</span></h1>
+            <p class="lead">Discover the best electronics and smart gadgets with unbeatable prices.</p>
+        </div>
+
+        <!-- Logo Section (Right on large screens) -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center p-5">
+            <img src="{% static 'images/krs.png' %}" alt="KRS Logo" class="img-fluid" style="max-width: 70%;">
+        </div>
+    </div>
+
+</div>
+ <div class="container my-5">
+  <h2 class="text-center text-light mb-4">Our Products</h2>
+
+  <!-- Desktop layout -->
+  <div class="row d-none d-sm-flex">
+    {% for i in "123" %}
+    <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card shadow-sm h-100" style="background-color: #2c2f33; color: white;">
+            <img src="{% static 'images/test.webp'%}" class="card-img-top" alt="error">
+            <div class="card-body text-center">
+            <h5 class="card-title">Product #{{ i }}</h5>
+            <p class="card-text">A brief description of a great and unique product.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button class="btn btn-dark fw-bold">Order Now</button>
+                <p class="fw-bold mb-0">$9.99</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <!-- Carousel layout on small screens -->
+  <div id="productCarousel" class="carousel slide d-block d-sm-none" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for i in "123456" %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="card mx-auto" style="width: 90%; background-color: #2c2f33; color: white;">
+          <img src="{% static 'images/test.webp'%}" class="card-img-top" alt="error">
+          <div class="card-body text-center">
+            <h5 class="card-title">Product #{{ i }}</h5>
+            <p class="card-text">A brief description of a great and unique product.</p>
+            <button class="btn btn-light fw-bold">Order Now</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
+
+{% endblock body %}

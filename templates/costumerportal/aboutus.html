@@ -1,0 +1,38 @@
+{% extends "costumerportal/layout.html" %}
+{% load static %}
+
+{% block title %}
+    About us
+{% endblock title %}
+
+{% block body %}
+<section class="about-section py-5 text-light" style="background-color: #111;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold">About KRS Store</h2>
+      <p class="lead text-secondary">Who we are and what we stand for.</p>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="{% static 'images/krs.png' %}" alt="About Image" class="img-fluid rounded-4 shadow">
+      </div>
+      <div class="col-md-6">
+        <h4 class="mb-3">Our Mission</h4>
+        <p class="text-secondary">
+          At KRS Store, we aim to bring you the latest and most innovative products in the world of technology. 
+          Whether you're a gamer, a tech lover, or someone looking for practical gadgets – we’ve got you covered.
+        </p>
+
+        <h4 class="mt-4 mb-3">Why Choose Us?</h4>
+        <ul class="list-unstyled text-secondary">
+          <li>✅ Trusted by thousands of happy customers</li>
+          <li>✅ High-quality and tested products</li>
+          <li>✅ Fast and reliable shipping</li>
+          <li>✅ Professional customer support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock body %}
