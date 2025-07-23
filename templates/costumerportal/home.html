@@ -37,7 +37,7 @@
             <p class="card-text">{{product.description|truncatechars:60}}</p>
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
-                <p class="fw-bold mb-0">${{product.price}}</p>
+                <p class="fw-bold mb-0">{{product.price}} DZD</p>
             </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
           <div class="card-body text-center">
             <h5 class="card-title">{{product.name}} </h5>
             <p class="card-text">{{product.description|truncatechars:60}}</p>
-            <p class="fw-bold mb-0">${{product.price}}</p>
+            <p class="fw-bold mb-0">{{product.price}} DZD</p>
             <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
           </div>
         </div>
