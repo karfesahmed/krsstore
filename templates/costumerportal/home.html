@@ -28,16 +28,16 @@
 
   <!-- Desktop layout -->
   <div class="row d-none d-sm-flex">
-    {% for i in "123" %}
-    <div class="col-12 col-sm-6 col-md-4 mb-4">
+    {% for product in products %}
+    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
         <div class="card shadow-sm h-100" style="background-color: #2c2f33; color: white;">
-            <img src="{% static 'images/test.webp'%}" class="card-img-top" alt="error">
+            <img src="{{product.images.first.image.url}}" class="card-img-top image-cover" alt="error" >
             <div class="card-body text-center">
-            <h5 class="card-title">Product #{{ i }}</h5>
-            <p class="card-text">A brief description of a great and unique product.</p>
+            <h5 class="card-title">{{product.name}} </h5>
+            <p class="card-text">{{product.description|truncatechars:60}}</p>
             <div class="d-flex justify-content-between align-items-center mt-3">
-                <button class="btn btn-dark fw-bold">Order Now</button>
-                <p class="fw-bold mb-0">$9.99</p>
+                <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
+                <p class="fw-bold mb-0">${{product.price}}</p>
             </div>
             </div>
         </div>
@@ -49,14 +49,15 @@
   <!-- Carousel layout on small screens -->
   <div id="productCarousel" class="carousel slide d-block d-sm-none" data-bs-ride="carousel">
     <div class="carousel-inner">
-      {% for i in "123456" %}
+      {% for product in products %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
         <div class="card mx-auto" style="width: 90%; background-color: #2c2f33; color: white;">
-          <img src="{% static 'images/test.webp'%}" class="card-img-top" alt="error">
+          <img src="{{product.images.first.image.url}}" class="card-img-top image-cover" alt="error">
           <div class="card-body text-center">
-            <h5 class="card-title">Product #{{ i }}</h5>
-            <p class="card-text">A brief description of a great and unique product.</p>
-            <button class="btn btn-light fw-bold">Order Now</button>
+            <h5 class="card-title">{{product.name}} </h5>
+            <p class="card-text">{{product.description|truncatechars:60}}</p>
+            <p class="fw-bold mb-0">${{product.price}}</p>
+            <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
           </div>
         </div>
       </div>
