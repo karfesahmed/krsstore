@@ -5,14 +5,14 @@ from .serializers import *
 from productmanager.models import WilayaInfo
 # Create your views here.
 def home(request):
-    products = Product.objects.all()[:3]
+    products = Product.objects.filter(is_active=True)[:3]
     
     return render(request,"costumerportal/home.html",{
         "products":products
     })
 
 def products(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(is_active = True)
     return render(request,"costumerportal/products.html",{
         "products":products
     })
@@ -45,7 +45,7 @@ def product(request,product_id):
 
 def category(request,category):
     category_selected = Category.objects.filter(name=category).first()
-    products = category_selected.products.all()
+    products = category_selected.products.filter(is_active = True)
     return render(request,"costumerportal/category.html",{
         "products":products,
         "category":category

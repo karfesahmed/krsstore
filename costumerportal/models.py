@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.FloatField()
     sale_price = models.FloatField(null=True,blank=True)
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True,related_name="products")
-
+    is_active = models.BooleanField(default=True)
     def is_on_sale(self):
         return self.sale_price is not None and self.sale_price<self.price
 

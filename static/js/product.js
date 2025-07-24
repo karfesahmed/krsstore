@@ -15,10 +15,12 @@ function btn_quantity(){
     const increase = document.querySelector("#increase");
     const inp_quantity = document.querySelector("#quantity")
     const span_quantity = document.querySelector("#quan")
+    const quan_price = document.querySelector("#quan-price")
     const current_price = document.querySelector("#product_price")
     const total = document.querySelector("#total")
     const wilaya = document.querySelector("#wilaya")
     const shipping = document.querySelector("#shipping")
+    const size = document.querySelector("#size")
     shipping.innerHTML = `select wilaya`
     let counter = 1;
     wilaya.addEventListener("change",()=>{
@@ -28,6 +30,24 @@ function btn_quantity(){
         span_quantity.innerHTML = counter
         shipping.innerHTML =`${wilaya.value.split(",")[1]} DZD`
     })
+    if(size !== null){
+
+        size.addEventListener('change',(e)=>{
+             if(wilaya.value === ""){
+                e.target.selectedIndex = 0;
+                alert("please choose your wilaya")
+            }else{
+                current_price.innerHTML = e.target.value.split(",")[1]
+                total.innerHTML = `${parseFloat(current_price.innerHTML) + parseFloat(wilaya.value.split(",")[1]) }`
+                quan_price.innerHTML = e.target.value.split(",")[1]
+                counter = 1
+                inp_quantity.value = counter
+                span_quantity.innerHTML = counter
+                shipping.innerHTML =`${wilaya.value.split(",")[1]} DZD`
+            }
+        })
+    }
+    
 
 
     
@@ -37,7 +57,7 @@ function btn_quantity(){
 
         if(counter>1){
             if(wilaya.value === ""){
-                alert("please select your wilaya")
+                alert("please choose your wilaya")
             }else{
                 counter--;
                 inp_quantity.value = counter

@@ -39,7 +39,7 @@
     <!-- Order Form -->
     <div class="col-md-6">
       <h4 class="mb-4">Fill in your information below and click "Confirm Order"</h4>
-      <h4 class="text-success" id="product_price">{{product.price}} DZD</h4>
+      <h4 class="text-success" ><span id="product_price">{{product.price}}</span> DZD</h4>
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
@@ -64,18 +64,19 @@
           <input type="text" class="form-control" name="address" required>
         </div>
         <!-- size color others ... -->
-        <div class="mb-3">
-          <label class="form-label">Choose Size</label>
-          <select class="form-select" name="size" id="size" required>
-            <option disabled selected value="">Select Size</option>
-            
-            {% for size in sizes %}
-              <option value="{{ size.title }},{{ size.price }}">{{ size.title }}--{{ size.price }} DZD</option>
-            {% endfor %}
-            
-          </select>
-        </div>
-
+        {% if sizes %}
+          <div class="mb-3">
+            <label class="form-label">Choose Size</label>
+            <select class="form-select" name="size" id="size" required>
+              <option disabled selected value="">Select Size</option>
+              
+              {% for size in sizes %}
+                <option value="{{ size.title }},{{ size.price }}">{{ size.title }}--{{ size.price }} DZD</option>
+              {% endfor %}
+              
+            </select>
+          </div>
+        {%endif%}
         <div class="row krs-card-group">
           {% for color in colors %}
             <div class="col-4 col-md-3 mt-3 mx-auto">
@@ -105,7 +106,7 @@
         <div class=" p-3">
           <h5>Order Summary</h5>
           <p>Product: <strong>{{product.name}}</strong></p>
-          <p>Quantity: <strong><span id="quan">1</span> × {{product.price}} DZD</strong></p>
+          <p>Quantity: <strong><span id="quan">1</span> × <span id="quan-price">{{product.price}}</span> DZD</strong></p>
           <p>Shipping Price: <strong><span id="shipping"></span></strong></p>
           <p>Total: <strong ><span id="total">{{product.price}}</span> DZD</strong></p>
         </div>
