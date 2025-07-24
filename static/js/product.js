@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded",()=>{
+    const current_price = parseFloat(document.querySelector("#product_price").innerHTML)
+    console.log(current_price);
+    
+    document.querySelector("#quan-price").innerHTML = current_price
+    document.querySelector("#total").innerHTML = current_price
     btn_quantity();
     const krsCards = document.querySelectorAll('.krs-card-option');
     krsCards.forEach(card => {

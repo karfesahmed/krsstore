@@ -1,0 +1,45 @@
+{% extends 'productmanager/layout.html' %}
+{% load static %}
+
+{% block js %}
+      <script src="{% static 'js/addproduct.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+    <div class="container mt-5 mb-5">
+        <div class="card shadow p-4" style="width: 100%; background-color: rgba(197, 197, 197, 0.747);">
+            <h3 class="text-center mb-4">All Products</h3>
+
+            <table class="table table-dark table-striped ">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">image</th>
+                    <th scope="col">name</th>
+                    <th scope="col">price</th>
+                    <th scope="col">status</th>
+                    <th scope="col">edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr >
+                            <th scope="row">{{product.id}}</th>
+                            <td><img src="{{product.images.first.image.url}}" alt="error" class="selected_images"></td>
+                            <td >{{product.name}}</td>
+                            <td>{{product.price}} DZD</td>
+                            <td>
+                                {% if product.is_active %}
+                                    active
+                                {% else %}
+                                    no active
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'edit' product.id %}">edit</a></td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+                </table>
+        </div>
+    </div>
+{% endblock %}

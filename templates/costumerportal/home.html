@@ -29,21 +29,34 @@
   <!-- Desktop layout -->
   <div class="row d-none d-sm-flex">
     {% for product in products %}
-    <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
-        <div class="card shadow-sm h-100" style="background-color: #2c2f33; color: white;">
-            <img src="{{product.images.first.image.url}}" class="card-img-top image-cover" alt="error" >
-            <div class="card-body text-center">
-            <h5 class="card-title">{{product.name}} </h5>
-            <p class="card-text">{{product.description|truncatechars:60}}</p>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
-                <p class="fw-bold mb-0">{{product.price}} DZD</p>
-            </div>
-            </div>
-        </div>
-    </div>
+  <div class="col-12 col-sm-6 col-md-4 mb-4 mx-auto">
+    <div class="card shadow-sm h-100 d-flex flex-column" style="background-color: #2c2f33; color: white; position: relative;">
 
-    {% endfor %}
+      {% if product.sale_price %}
+        <div style="position: absolute; top: 10px; left: 10px; background-color: red; color: white; padding: 8px 12px; font-weight: bold; border-radius: 5px; font-size: 16px;">
+          <del>{{ product.price }} DZD</del>
+        </div>
+      {% endif %}
+
+      <img src="{{ product.images.first.image.url }}" class="card-img-top image-cover" alt="error">
+      
+      <div class="card-body text-center d-flex flex-column">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text mb-4">{{ product.description|truncatechars:60 }}</p>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+          <a href="{% url 'product' product.id %}" class="btn btn-dark fw-bold">Order Now</a>
+          
+          {% if product.sale_price %}
+            <p class="fw-bold mb-0 text-warning">{{ product.sale_price }} DZD</p>
+          {% else %}
+            <p class="fw-bold mb-0">{{ product.price }} DZD</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
   </div>
 
   <!-- Carousel layout on small screens -->

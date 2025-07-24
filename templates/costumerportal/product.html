@@ -39,7 +39,21 @@
     <!-- Order Form -->
     <div class="col-md-6">
       <h4 class="mb-4">Fill in your information below and click "Confirm Order"</h4>
-      <h4 class="text-success" ><span id="product_price">{{product.price}}</span> DZD</h4>
+      <h4 class="mt-3">
+        {% if product.is_on_sale %}
+          <span id="product_price" style="color: #28a745; font-size: 1.5rem; font-weight: bold;">
+            {{ product.sale_price }} DZD
+          </span>
+          &emsp;
+          <span style="color: #dc3545; font-size: 1.2rem;">
+            <s>{{ product.price }} DZD</s>
+          </span>
+        {% else %}
+          <span id="product_price" style="color: #007bff; font-size: 1.4rem; font-weight: bold;">
+            {{ product.price }} DZD
+          </span>
+        {% endif %}
+      </h4>
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
@@ -106,9 +120,9 @@
         <div class=" p-3">
           <h5>Order Summary</h5>
           <p>Product: <strong>{{product.name}}</strong></p>
-          <p>Quantity: <strong><span id="quan">1</span> × <span id="quan-price">{{product.price}}</span> DZD</strong></p>
+          <p>Quantity: <strong><span id="quan">1</span> × <span id="quan-price"></span> DZD</strong></p>
           <p>Shipping Price: <strong><span id="shipping"></span></strong></p>
-          <p>Total: <strong ><span id="total">{{product.price}}</span> DZD</strong></p>
+          <p>Total: <strong ><span id="total"></span> DZD</strong></p>
         </div>
       </div>
         
