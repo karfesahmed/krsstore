@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, Image, Other
+from .models import Category, Product, Image, Color,Size
 
 # Serializer for Image
 class ImageSerializer(serializers.ModelSerializer):
@@ -7,11 +7,18 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ['id', 'image']
 
-# Serializer for Other
-class OtherSerializer(serializers.ModelSerializer):
+# Serializer for Color
+class ColorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Other
-        fields = ['id', 'title', 'price', 'image']
+        model = Color
+        fields = ['id', 'title', 'image']
+
+
+# Serializer for Size
+class SizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Color
+        fields = ['id', 'title', 'price']
 
 # Serializer for Category
 class CategorySerializer(serializers.ModelSerializer):
@@ -22,7 +29,8 @@ class CategorySerializer(serializers.ModelSerializer):
 # Serializer for Product
 class ProductSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
-    others = OtherSerializer(many=True, read_only=True)
+    color = ColorSerializer(many=True, read_only=True)
+    size = SizeSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
     is_on_sale = serializers.SerializerMethodField()
 
@@ -30,7 +38,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = [
             'id', 'name', 'description', 'price', 'sale_price',
-            'is_on_sale', 'category', 'images', 'others'
+            'is_on_sale', 'category', 'images', 'color','size'
         ]
 
     def get_is_on_sale(self, obj):

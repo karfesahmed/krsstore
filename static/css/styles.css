@@ -60,7 +60,10 @@ body {
 }
 
 
-
+.custom-img {
+  height: 70vh;
+  object-fit: cover;
+}
 
 @media (max-width: 576px) {
   .custom-img {
@@ -75,4 +78,89 @@ input[type=number]::-webkit-inner-spin-button {
 }
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+
+
+
+
+
+.row.krs-card-group > .col-4 {
+  display: flex;
+}
+
+/* الكارد ككل */
+.krs-card-option {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* التأثير عند المرور */
+.krs-card-option:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* إخفاء دائرة الراديو */
+.krs-card-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.krs-card-option input[type="radio"]:checked + .krs-card-content {
+  border: 2px solid #0d6efd;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+  transform: scale(1.02);
+  transition: 0.3s;
+}
+
+/* محتوى الكارد */
+.krs-card-content {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #000000;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* عند التحديد */
+.krs-card-option.krs-selected .krs-card-content {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+/* الصورة */
+.krs-image-wrapper {
+  height: 100px; /* الطول الافتراضي لسطح المكتب */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* عند الشاشات الصغيرة (الهاتف): قلل الطول */
+@media (max-width: 576px) {
+  .krs-image-wrapper {
+    height: 70px;
+  }
+}
+
+.krs-color-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* العنوان */
+.krs-title {
+  padding: 12px;
+  text-align: center;
+  margin: 0;
 }

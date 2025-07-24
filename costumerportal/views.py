@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .models import *
 from .serializers import *
+from productmanager.models import WilayaInfo
 # Create your views here.
 def home(request):
     products = Product.objects.all()[:3]
@@ -32,11 +33,23 @@ def product(request,product_id):
         product = Product.objects.get(pk=int(product_id))
     except Product.DoesNotExist:
         return HttpResponse("Product Does Not Exist")
-    
+    wilayas = WilayaInfo.objects.all()
+    colors = Color.objects.filter(product = product)
+    sizes = Size.objects.filter(product = product)
     return render(request,"costumerportal/product.html",{
-        "product":product
+        "product":product,
+        "wilayas":wilayas,
+        "colors":colors,
+        "sizes" : sizes
     })
 
+def category(request,category):
+    category_selected = Category.objects.filter(name=category).first()
+    products = category_selected.products.all()
+    return render(request,"costumerportal/category.html",{
+        "products":products,
+        "category":category
+    })
 
 # API's
 

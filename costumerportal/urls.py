@@ -10,6 +10,7 @@ urlpatterns = [
     path('privacy',views.Privacy_Policy,name="privacy"),
     path('tup',views.thank_u_page,name="tup"),
     path('product/<int:product_id>',views.product,name="product"),
+    path('category/<str:category>',views.category,name="category"),
 
     # API's
     path('prod/<int:product_id>',views.prod)

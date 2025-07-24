@@ -4,5 +4,6 @@ from .models import *
 
 admin.site.register(Product)
 admin.site.register(Image)
-admin.site.register(Other)
+admin.site.register(Color)
+admin.site.register(Size)
 admin.site.register(Category)
