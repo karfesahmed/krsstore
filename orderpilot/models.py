@@ -8,12 +8,15 @@ class Order(models.Model):
     Name = models.CharField(max_length=60)
     Phone = models.CharField(max_length=10)
     order_type = models.CharField(max_length=1,default="0") # confirmed cancel later ....
+    confirmed = models.CharField(max_length=1,default="0")
     delivery_type =models.CharField(max_length=1,default="0")
     Address = models.CharField(max_length=255)
     Size = models.CharField(max_length=60,null=True,blank=True)
     Color = models.CharField(max_length=60,null=True,blank=True)
     quantity = models.IntegerField(default=1)
     total = models.CharField(max_length=10)
+    note = models.TextField(null=True,blank=True,default="")
+    
     
     def tracking_id(self):
         return f"trk-{self.pk}"

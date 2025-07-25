@@ -1,16 +1,54 @@
 {% extends 'productmanager/layout.html' %}
 {% load static %}
 {% block js %}
-
+    <script src="{% static 'js/orders.js' %}"></script>
 {% endblock js %}
 
 {% block content %}
     <div class="container mt-5 mb-5">
         <div class="card shadow p-4" style="width: 100%; background-color: rgba(197, 197, 197, 0.747);">
             <h3 class="text-center mb-4">All orders</h3>
+            <div class="d-flex gap-2 mb-3">
+                <button class="status-filter btn btn-outline-dark btn-sm filter-tab active" id="0" data-status="all">📋 Not Reviewed</button>
+                <button class="status-filter btn btn-outline-success btn-sm filter-tab" id="1" data-status="confirm">✅ Confirmed</button>
+                <button class="status-filter btn btn-outline-secondary btn-sm filter-tab" id="2" data-status="delay">⏳ Postponed</button>
+                <button class="status-filter btn btn-outline-warning btn-sm filter-tab" id="3" data-status="no_answer">📞 No Answer</button>
+                <button class="status-filter btn btn-outline-danger btn-sm filter-tab" id="4" data-status="cancel">❌ Cancelled</button>
+            </div>
+            <hr>
+            {% csrf_token %}
+            <div class="overflow-auto" style="white-space: nowrap;">
+            <!-- ✅ Header -->
+            <div class="d-flex fw-bold bg-light border rounded px-2 py-2 mb-2" style="min-width: 1400px; font-size: 0.85rem;">
+                <div style="width: 40px;" class="text-center">ID</div>
+                <div style="width: 120px;" class="text-center">Name</div>
+                <div style="width: 130px;" class="text-center">📞 Phone</div>
+                <div style="width: 100px;" class="text-center">Wilaya</div>
+                <div style="width: 200px;" class="text-center">📍 Address</div>
+                <div style="width: 110px;" class="text-center">Delivery Type</div>
+                <div style="width: 200px;" class="text-center">Note</div>
+                <div style="width: 170px;" class="text-center">Status</div>
+                <div style="width: 150px;" class="text-center">Product</div>
+                <div style="width: 80px;" class="text-center">Quantity</div>
+                <div style="width: 100px;" class="text-center">Total</div>
+                <div style="width: 110px;" class="text-center">✔</div>
+            </div>
 
-        </div>
-    </div>
+            <div id="orders" class="text-center">
+                <!-- Orders will be inserted here -->
+            </div>
+            </div>
+                </div>
+            </div>
 
-
+<script>
+    const tabs = document.querySelectorAll(".filter-tab");
+                tabs.forEach(tab => {
+                    tab.addEventListener("click", () => {
+                        tabs.forEach(t => t.classList.remove("active"));
+                        tab.classList.add("active");
+                    })
+                });
+    
+</script>
 {% endblock content %}
