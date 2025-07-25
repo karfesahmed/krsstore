@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded",()=>{
         })
 
     })
+    document.querySelectorAll(".remove-size-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        button.closest(".row").remove();
+      });
+    });
+
 
 
     const addSizeBtn = document.getElementById("add-size-btn");
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         </div>
         <div class="col-md-5">
           <input type="file" name="color_image[]" accept="image/*" class="form-control color-image-input" data-preview-id="preview-${colorId}" required>
-          
+          <input type="hidden" name="exist_color[]" value="not-exist">
         </div>
         <div class="col-md-1 text-end">
           <button type="button" class="btn btn-danger remove-color-btn">X</button>
