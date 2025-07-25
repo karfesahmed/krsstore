@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'orderpilot',
     'productmanager',
     'costumerportal',
     'django.contrib.admin',

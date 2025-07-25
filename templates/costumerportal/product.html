@@ -85,7 +85,15 @@
               <option disabled selected value="">Select Size</option>
               
               {% for size in sizes %}
-                <option value="{{ size.title }},{{ size.price }}">{{ size.title }}--{{ size.price }} DZD</option>
+                {% if size.price == product.price %}
+                  {% if product.is_on_sale %}
+                    <option selected value="{{ size.title }},{{ product.sale_price }}">{{ size.title }}--{{ product.sale_price }} DZD</option>
+                  {% else %}
+                    <option selected value="{{ size.title }},{{ size.price }}">{{ size.title }}--{{ size.price }} DZD</option>
+                  {%endif%}
+                {%else%}
+                  <option value="{{ size.title }},{{ size.price }}">{{ size.title }}--{{ size.price }} DZD</option>
+                {%endif%}
               {% endfor %}
               
             </select>
