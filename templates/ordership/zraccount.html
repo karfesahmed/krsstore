@@ -1,0 +1,35 @@
+{% extends 'productmanager/layout.html' %}
+
+{% load static %}
+
+{% block js %}
+
+{% endblock js %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4" style="width: 100%; background-color: rgba(197, 197, 197, 0.747);">
+        <h2 class="mb-4">ZR Express - API Credentials</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="token" class="form-label">Token:</label>
+                <input type="text" 
+                    {%if zr_account.token%} 
+                        value="{{zr_account.token}}" 
+                    {%endif%} 
+                    class="form-control" id="token" name="token" placeholder="Enter your token" required>
+            </div>
+            <div class="mb-3">
+                <label for="key" class="form-label">Key:</label>
+                <input type="text" 
+                    {%if zr_account.key%} 
+                        value="{{zr_account.key}}" 
+                    {%endif%} 
+                class="form-control" id="key" name="key" placeholder="Enter your key" required>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

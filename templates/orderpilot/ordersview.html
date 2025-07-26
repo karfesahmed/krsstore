@@ -54,8 +54,11 @@
             </div>
                 </div>
             </div>
-
-<script>
-
-</script>
+{% if messages %}
+  <script>
+    {% for message in messages %}
+      alert("{{ message|escapejs }}");
+    {% endfor %}
+  </script>
+{% endif %}
 {% endblock content %}

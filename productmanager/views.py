@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login,logout
 
 def login_view(request):
   message_error = None
-  if request.user.is_authenticated  and request.user.is_superuser and request.user.is_staff:
+  if request.user.is_superuser:
     return HttpResponseRedirect(reverse('all_products'))
   if request.method == 'POST':
     username = request.POST["username"]
@@ -29,7 +29,7 @@ def logout_view(request):
   return redirect('login')
 
 def add_product(request):
-  if request.user.is_authenticated  and request.user.is_superuser and request.user.is_staff:
+  if request.user.is_superuser:
     categories = Category.objects.all()
     if request.method == 'POST':
       name = request.POST["name"]
@@ -73,7 +73,7 @@ def add_product(request):
   else:
     return HttpResponseForbidden("log in please")
 def all_products(request):
-  if request.user.is_authenticated  and request.user.is_superuser and request.user.is_staff:
+  if request.user.is_superuser:
     products = Product.objects.all().order_by('-id')
     return render(request,"productmanager/allproducts.html",{
       "products":products
@@ -82,7 +82,7 @@ def all_products(request):
     return HttpResponseForbidden("log in please")
 
 def edit_product(request,product_id):
-  if request.user.is_authenticated and request.user.is_superuser and request.user.is_staff:
+  if request.user.is_superuser:
     product = get_object_or_404(Product, pk=int(product_id))
     categories = Category.objects.all()
 
@@ -167,6 +167,7 @@ def edit_product(request,product_id):
 
 
 def wilayas(request):
+  
   if request.method == 'GET':
     wilayat = WilayaInfo.objects.all()
     serializer = WilayaInfoSerializer(wilayat,many=True)

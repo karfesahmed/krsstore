@@ -1,0 +1,82 @@
+{% extends 'productmanager/layout.html' %}
+{% load static %}
+
+{% block js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const ordersContainer = document.getElementById("orders");
+    ordersContainer.innerHTML = "Loading orders..."
+    fetch("http://localhost:8000/orderpilot/zrorders")
+        .then(response => response.json())
+        .then(data => {
+            ordersContainer.innerHTML = ""
+            if (!data.Colis || data.Colis.length === 0) {
+                ordersContainer.innerHTML = "<p>No orders found.</p>";
+                return;
+            }
+
+            data.Colis.forEach(order => {
+                const row = document.createElement("div");
+                row.className = "d-flex border rounded px-2 py-2 mb-2 align-items-center";
+                row.style.minWidth = "1400px";
+                row.style.fontSize = "0.85rem";
+
+                row.innerHTML = `
+                    <div style="width: 40px;">${order.id_Externe}</div>
+                    <div style="width: 120px;">${order.Client}</div>
+                    <div style="width: 130px;">${order.MobileA}</div>
+                    <div style="width: 100px;">${order.Wilaya}</div>
+                    <div style="width: 200px;">${order.Adresse}</div>
+                    <div style="width: 110px;">${order.TypeLivraison == 0 ? "Domicile" : "Stopdesk"}</div>
+                    <div style="width: 200px;">${order.Note || ""}</div>
+                    <div style="width: 170px;"><mark>${order.Situation}</mark></div>
+                    <div style="width: 150px;">${order.TProduit}</div>
+                    <div style="width: 80px;">-</div>
+                    <div style="width: 80px;">-</div>
+                    <div style="width: 80px;">-</div>
+                    <div style="width: 100px;">${order.Total}</div>
+                    <div style="width: 110px;">✔</div>
+                `;
+                ordersContainer.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("❌ Error fetching orders:", error);
+            alert("❌ Failed to fetch tracking orders. Please check the server.");
+        });
+});
+</script>
+{% endblock js %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card shadow p-4" style="width: 100%; background-color: rgba(197, 197, 197, 0.747);">
+        <h3 class="text-center mb-4">Tracking orders in ZR express</h3>
+        <hr>
+
+        <div class="overflow-auto" style="white-space: nowrap;">
+            <!-- ✅ Header -->
+            <div class="d-flex fw-bold bg-light border rounded px-2 py-2 mb-2" style="min-width: 1400px; font-size: 0.85rem;">
+                <div style="width: 40px;" class="text-center">ID</div>
+                <div style="width: 120px;" class="text-center">Name</div>
+                <div style="width: 130px;" class="text-center">📞 Phone</div>
+                <div style="width: 100px;" class="text-center">Wilaya</div>
+                <div style="width: 200px;" class="text-center">📍 Address</div>
+                <div style="width: 110px;" class="text-center">Delivery Type</div>
+                <div style="width: 200px;" class="text-center">Note</div>
+                <div style="width: 170px;" class="text-center">Status</div>
+                <div style="width: 150px;" class="text-center">Product</div>
+                <div style="width: 80px;" class="text-center">Color</div>
+                <div style="width: 80px;" class="text-center">Size</div>
+                <div style="width: 80px;" class="text-center">Quantity</div>
+                <div style="width: 100px;" class="text-center">Total</div>
+                <div style="width: 110px;" class="text-center">✔</div>
+            </div>
+
+            <!-- ✅ Data will be inserted here -->
+            <div id="orders" class="text-center"></div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

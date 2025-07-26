@@ -23,6 +23,7 @@ urlpatterns = [
     path('',include('costumerportal.urls')),
     path('productmanager/',include('productmanager.urls')),
     path('orderpilot/',include('orderpilot.urls')),
+    path('ordership/',include('ordership.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
