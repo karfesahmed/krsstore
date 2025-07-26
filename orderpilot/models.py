@@ -7,9 +7,9 @@ class Order(models.Model):
     IDwilaya = models.CharField(max_length=2)
     Name = models.CharField(max_length=60)
     Phone = models.CharField(max_length=10)
-    order_type = models.CharField(max_length=1,default="0") # confirmed cancel later ....
+    order_type = models.CharField(max_length=1,default="0") 
     confirmed = models.CharField(max_length=1,default="0")
-    delivery_type =models.CharField(max_length=1,default="0")
+    delivery_type =models.CharField(max_length=1,default="0") # confirmed cancel later ....
     Address = models.CharField(max_length=255)
     Size = models.CharField(max_length=60,null=True,blank=True)
     Color = models.CharField(max_length=60,null=True,blank=True)

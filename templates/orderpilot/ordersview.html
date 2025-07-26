@@ -8,6 +8,17 @@
     <div class="container mt-5 mb-5">
         <div class="card shadow p-4" style="width: 100%; background-color: rgba(197, 197, 197, 0.747);">
             <h3 class="text-center mb-4">All orders</h3>
+            <div class="mt-2 mb-2">
+                <form id="zr-form" method="POST" style="display: none;">
+                    {% csrf_token %}
+                    <button 
+                        type="submit" 
+                        class="status-filter btn btn-outline-success btn-sm" >
+                        ✅ send to zrexpress
+                    </button>
+                </form>
+            </div>
+            
             <div class="d-flex gap-2 mb-3">
                 <button class="status-filter btn btn-outline-dark btn-sm filter-tab active" id="0" data-status="all">📋 Not Reviewed</button>
                 <button class="status-filter btn btn-outline-success btn-sm filter-tab" id="1" data-status="confirm">✅ Confirmed</button>
@@ -15,6 +26,7 @@
                 <button class="status-filter btn btn-outline-warning btn-sm filter-tab" id="3" data-status="no_answer">📞 No Answer</button>
                 <button class="status-filter btn btn-outline-danger btn-sm filter-tab" id="4" data-status="cancel">❌ Cancelled</button>
             </div>
+            
             <hr>
             {% csrf_token %}
             <div class="overflow-auto" style="white-space: nowrap;">
@@ -29,6 +41,8 @@
                 <div style="width: 200px;" class="text-center">Note</div>
                 <div style="width: 170px;" class="text-center">Status</div>
                 <div style="width: 150px;" class="text-center">Product</div>
+                <div style="width: 80px;" class="text-center">Color</div>
+                <div style="width: 80px;" class="text-center">size</div>
                 <div style="width: 80px;" class="text-center">Quantity</div>
                 <div style="width: 100px;" class="text-center">Total</div>
                 <div style="width: 110px;" class="text-center">✔</div>
@@ -42,13 +56,6 @@
             </div>
 
 <script>
-    const tabs = document.querySelectorAll(".filter-tab");
-                tabs.forEach(tab => {
-                    tab.addEventListener("click", () => {
-                        tabs.forEach(t => t.classList.remove("active"));
-                        tab.classList.add("active");
-                    })
-                });
-    
+
 </script>
 {% endblock content %}

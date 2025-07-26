@@ -6,5 +6,6 @@ urlpatterns=[
 
 
     #API's
-    path('orders-list',views.orders_list)
+    path('orders-list',views.orders_list),
+    path('order-detail/<int:order_id>',views.order_detail),
 ]
